@@ -1,0 +1,13 @@
+{
+  "appId": "io.patara_20_11_25.starter",
+  "appName": "11-18_senhas",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Controle de senhas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-item>
+      <ion-label 
+        position="floating" 
+        [ngClass]="{'errored' : errorList.includes('name')}"
+      >
+        Nome
+      </ion-label>
+      <ion-input [(ngModel)]="currentAccount.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label 
+        position="floating" 
+        [ngClass]="{'errored' : errorList.includes('login')}"
+      >
+        Login
+      </ion-label>
+      <ion-input [(ngModel)]="currentAccount.login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label 
+        position="floating" 
+        [ngClass]="{'errored' : errorList.includes('password')}"
+      >
+        Senha
+      </ion-label>
+      <ion-input [(ngModel)]="currentAccount.password" type="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="add()">ADICIONAR</ion-button>
+    <ion-list *ngIf="accountList.length > 0">
+      <ion-item *ngFor="let account of accountList">
+        <ion-label (click)="showData(account.name)">{{ account.name }}</ion-label>
+        <span class="remove" (click)="confirmDelete(account.name)">Remover</span>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
