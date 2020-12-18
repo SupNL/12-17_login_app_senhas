@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Details</ion-title>
+    <ion-title>Detalhes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-list>
-    <ion-list-header>
-      AAAAAAAAA
-    </ion-list-header>
+    <ion-item>
+      <ion-text color="dark">
+        <h2>{{name}}</h2>
+      </ion-text>
+    </ion-item>
     <ion-item>
       <ion-label>
         Login: {{login}}
@@ -20,8 +22,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-button color="dark" (click)="close()">
-    <ion-icon name="arrow-back-circle-outline"></ion-icon>
+  <ion-button color="dark" (click)="close()" expand="block">
     Voltar
   </ion-button>
 </ion-content>

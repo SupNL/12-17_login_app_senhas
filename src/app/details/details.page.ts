@@ -6,16 +6,13 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage {
 
   @Input() name : string;
   @Input() login : string;
   @Input() password : string;
 
   constructor(public modalController : ModalController) { }
-
-  ngOnInit() {
-  }
 
   close() {
     this.modalController.dismiss({
