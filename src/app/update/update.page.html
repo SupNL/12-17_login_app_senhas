@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Alterar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form" (ngSubmit)="save()" >
+
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.name">
+        <div *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Login</ion-label>
+      <ion-input type="text" formControlName="login"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.login">
+        <div *ngIf="form.get('login').hasError(validation.type) && (form.get('login').dirty || form.get('login').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <div class="validation-error">
+      <ng-container class="messageError" *ngFor="let validation of validationMessages.password">
+        <div *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+          <ion-text color="danger">{{ validation.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button type="submit" expand="block" [disabled]="!form.valid">
+      Atualizar
+    </ion-button>
+    <ion-button color="dark" (click)="close()" expand="block">
+      Cancelar
+    </ion-button>
+
+  </form>  
+</ion-content>
