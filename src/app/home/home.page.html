@@ -39,7 +39,10 @@
     <ion-list *ngIf="accountList.length > 0">
       <ion-item *ngFor="let account of accountList">
         <ion-label (click)="showData(account.name)">{{ account.name }}</ion-label>
-        <span class="remove" (click)="confirmDelete(account.name)">Remover</span>
+        <div class="buttons">
+          <span class="update" (click)="updateData(account.name)">Alterar</span>
+          <span class="remove" (click)="confirmDelete(account.name)">Remover</span>
+        </div>
       </ion-item>
     </ion-list>
   </div>

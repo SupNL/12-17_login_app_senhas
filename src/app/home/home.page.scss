@@ -27,4 +27,18 @@
     ion-list ion-item span.remove:active {
         color : var(--ion-color-danger-tint);
     }
+
+    ion-list ion-item span.update {
+        color: var(--ion-color-warning);
+        margin-right: 8px;
+    }
+
+    ion-list ion-item span.update:hover {
+        cursor: pointer;
+        color : var(--ion-color-warning-shade);
+    }
+
+    ion-list ion-item span.update:active {
+        color : var(--ion-color-warning-tint);
+    }
 }

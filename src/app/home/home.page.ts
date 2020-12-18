@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { DetailsPage } from '../details/details.page';
+import { UpdatePage } from '../update/update.page';
 
 interface Account {
   name : string;
@@ -27,11 +28,19 @@ export class HomePage {
   constructor(
     private alertController : AlertController, 
     private storage : StorageService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private toastController : ToastController
   ) {
     this.storage.load("accounts").then(accounts => {
       if(accounts !== null) this.accountList = accounts;
     })
+  }
+
+  async presentToast(message : string, duration : number) {
+    const toast = await this.toastController.create({
+      message, duration
+    });
+    toast.present();
   }
 
   public async showError(message : string) {
@@ -73,8 +82,37 @@ export class HomePage {
         }
       })
       await modal.present();
+    }
+  }
+
+  public async updateData(name : string) {
+    const selectedAccount = this.accountList.find(account => {
+      return account.name === name;
+    })
+    if(selectedAccount) {
+      const modal = await this.modalController.create({
+        component: UpdatePage,
+        componentProps : {
+          'name' : selectedAccount.name,
+          'login' : selectedAccount.login,
+          'password' : selectedAccount.password,
+          'accountList' : this.accountList
+        }
+      })
+      await modal.present();
       const { data } = await modal.onWillDismiss();
-      console.log(data);
+      if(data.save) {
+        const oldName = data.oldName;
+        const accountToUpdate : Account = data.account;
+        this.accountList = this.accountList.map(account => {
+          if(account.name == oldName) 
+            return accountToUpdate;
+          return account;
+        })
+        this.storage.save("accounts", this.accountList).then(() => {
+          this.presentToast("Alterações salva com sucesso.", 3000);
+        })
+      }
     }
   }
 
